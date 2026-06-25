@@ -31,12 +31,12 @@ impl<T> Arc<T> {
     }
 
     pub fn get_mut(arc: &mut Self) -> Option<&mut T> {
-        if arc.data().ref_count.load(Ordering::Relaxed) == 1 {
+        if arc.data().ref_count.load(Ordering::Relaxed) == 1 { // only one owner, safe to return mutable reference
             fence(Ordering::Acquire);
 
             unsafe { Some(&mut arc.ptr.as_mut().data) }
         }
-        else {
+        else { // many owners, cannot return mutable reference
             None
         }
     }
@@ -130,4 +130,16 @@ fn arc_get_mut_test() {
     }
 
     assert_eq!(x, "Hello".to_string());
+}
+
+#[test]
+fn arc_deref_test() {
+    let x: Arc<String> = Arc::new("text".to_string());
+
+    assert_eq!(*x, "text".to_string());
+
+    let ref_to_string: &String = x.deref();
+    assert_eq!(ref_to_string, &"text".to_string());
+
+    println!("Length of string in Arc: {}", x.len());
 }
