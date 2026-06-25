@@ -33,6 +33,7 @@ pub fn get_primes_in_range(range: std::ops::RangeInclusive<u32>) -> Vec<u32> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use rstest::rstest;
 
     #[test]
     fn test_get_primes_up_to() {
@@ -40,12 +41,14 @@ mod tests {
         assert_eq!(primes, vec![2, 3, 5, 7]);
     }   
 
-    #[test]
-    fn test_is_prime() {
-        assert!(is_prime(2));
-        assert!(is_prime(3));
-        assert!(!is_prime(4));
-        assert!(is_prime(5));
+    #[rstest]
+    #[case(1, false)]
+    #[case(2, true)]
+    #[case(3, true)]
+    #[case(4, false)]
+    #[case(5, true)]
+    fn test_is_prime(#[case] input: u32, #[case] expected: bool) {
+        assert_eq!(is_prime(input), expected);
     }
 
     #[test]
