@@ -1,3 +1,3 @@
 [workspace]
-members = ["code/hello-world", "exercises/primes", "exercises/readfile", "exercises/vector", "exercises/readfile"]
+members = ["code/hello-world", "exercises/primes", "exercises/readfile", "exercises/vector", "exercises/readfile", "code/spinlock"]
 resolver = "3"
