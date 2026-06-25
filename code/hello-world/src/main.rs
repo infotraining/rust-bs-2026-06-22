@@ -1,38 +1,19 @@
-static GREETING: &str = "Hello, world!";
+mod math;
 
-static mut COUNTER: u32 = 0;
-
-fn increment_counter() {
-    unsafe {
-        COUNTER += 1;
-    }
-}
-
-fn print_counter() {
-    unsafe {
-        println!("Counter: {}", COUNTER);
-    }
-}
+use math::prelude::*;
 
 fn main() {
-    let mut message = GREETING.to_string();
-    message += "!!";
-    println!("{message}");
+    let fib = get_n_fibonacci(10);
+    println!("{:?}", fib);
 
-    increment_counter();
-    print_counter();
+    let fib_range = get_fibonacci_in_range(5..=10);
+    println!("{:?}", fib_range);    
 
-    let big_number: i32 = std::i32::MAX;
+    let primes = get_primes_up_to(10);
+    println!("{:?}", primes);
 
-    let flag = false;
+    let primes_range = get_primes_in_range(10..=20);
+    println!("{:?}", primes_range);
 
-    let dx;
-    if flag {
-        dx = 1;
-    } else {
-        dx = 0;
-    }
-
-    let next_number = big_number + dx;
-    println!("Next number: {}", next_number);
+    //let is_seven_a_prime = math::primes::is_prime(7);
 }
