@@ -3,6 +3,8 @@ mod vector;
 // use vector::Vector2D;
 
 fn main() {
+    // let v0 = Vector2D { x: 1.0, y: 2.0 };
+
     // let v1 = Vector2D::new(1.0, 2.0);
     // let v2 = Vector2D::new(1.0, 2.0);
 
